@@ -1,7 +1,7 @@
 <template>
   <div class="content">
     <div class="ask">
-      {{ msg }}
+      <div>{{ msg }}&nbsp;</div>
       <input type="text" v-model="question" />
       <button type="button" @click="getAnswer">Ask</button>
     </div>
@@ -18,7 +18,7 @@ export default {
   name: 'Home',
   data () {
     return {
-      msg: 'Ask me a question ...',
+      msg: 'Ask me a question ... ',
       question: ''
     } 
   },
@@ -34,8 +34,6 @@ export default {
             type: 'addQuestion',
             question: { answer: data.answer, image: data.image, key: store.state.questions.length, question: this.question }
           })
-          // this.answers.push({ answer: data.answer, image: data.image, key: this.answers.length, question: this.question });
-          // this.question = '';
       })
       .catch(e => {
         // this.errors.push(e)
@@ -52,11 +50,21 @@ export default {
   flex-direction: column;
 }
 
+.ask {
+  display: flex;
+  justify-content: center;
+  padding: 100px;
+  background-color: #ccc;
+  border-bottom: solid 1px #bbb;
+  font-size: 24px;
+  /* color: white; */
+}
+
 .results {
   margin-top: 25px;
 }
 
 .answerImage {
-  width: 200px;
+  width: 100px;
 }
 </style>

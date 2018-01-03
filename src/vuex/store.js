@@ -9,14 +9,11 @@ const store = new Vuex.Store({
   },
   mutations: {
     addQuestion (state, payload) {
-      console.log(payload)
-      console.log(payload.question)
       return state.questions.push(payload.question);
     }
   },
   actions: {
     addQuestion (context, payload) {
-      console.log(payload)
       context.commit('addQuestion', payload)
     }
   }
