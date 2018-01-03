@@ -5,36 +5,37 @@
       <input type="text" v-model="question" />
       <button type="button" @click="getAnswer">Ask</button>
     </div>
-    <div class="results">
-      <div v-for="answer in answers" v-bind:key="answer.key">
-        {{ answer.question }}
-        {{ answer.answer }}
-        <img class="answerImage" :src="answer.image"/>
-      </div>
-    </div>
+    <Answers />
   </div>
 </template>
 
 <script>
 import axios from 'axios';
+import Answers from './Answers'
+import store from '../vuex/store'
 
 export default {
   name: 'Home',
   data () {
     return {
       msg: 'Ask me a question ...',
-      question: '',
-      answers: []
+      question: ''
     } 
+  },
+  components: {
+    Answers
   },
   methods: {
     getAnswer() {
       axios.get('https://yesno.wtf/api')
         .then(response => {
           const data = response.data;
-          console.log(this.question)
-          this.answers.push({ answer: data.answer, image: data.image, key: this.answers.length, question: this.question });
-          this.question = '';
+           store.dispatch({
+            type: 'addQuestion',
+            question: { answer: data.answer, image: data.image, key: store.state.questions.length, question: this.question }
+          })
+          // this.answers.push({ answer: data.answer, image: data.image, key: this.answers.length, question: this.question });
+          // this.question = '';
       })
       .catch(e => {
         // this.errors.push(e)
