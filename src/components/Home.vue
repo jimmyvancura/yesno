@@ -57,7 +57,6 @@ export default {
   background-color: #ccc;
   border-bottom: solid 1px #bbb;
   font-size: 24px;
-  /* color: white; */
 }
 
 .results {
