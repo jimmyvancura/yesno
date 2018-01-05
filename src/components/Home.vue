@@ -33,7 +33,6 @@ export default {
         if (!result) {
           return;
         }
-        
         axios.get('https://yesno.wtf/api')
         .then(response => {
           const data = response.data;
@@ -41,6 +40,7 @@ export default {
             type: 'addQuestion',
             question: { answer: data.answer, image: data.image, key: store.state.questions.length, question: this.question }
           })
+          this.question = '';
         })
         .catch(e => {
           // this.errors.push(e)
