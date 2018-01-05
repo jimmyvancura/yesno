@@ -1,8 +1,10 @@
 <template>
   <div class="question">
-    <div v-for="question in questions" v-bind:key="question.key">
-      <div>{{ question.question }}</div>
-      <img class="answerImage" :src="question.image"/>
+    Images and answers provided by: <a href="https://yesno.wtf" target="_new">https://yesno.wtf</a>
+    <div v-for="(question, index) in questions" v-bind:key="question.key">
+      <div class="questionText">{{ question.question }}</div>
+      <img v-bind:class="[(index===0) ? 'answerImage' : 'answerImageSmall']" :src="question.image"/>
+      <div>({{ question.answer }})</div>
     </div>
   </div>
 </template>
@@ -23,13 +25,18 @@ export default {
 .question {
   display: flex;
   flex-direction: column;
+  margin-bottom: 20px;
 }
 
-.results {
-  margin-top: 25px;
+.questionText {
+  margin-top: 20px;
 }
 
 .answerImage {
-  width: 200px;
+  width: 300px;
+}
+
+.answerImageSmall {
+  width: 100px;
 }
 </style>
